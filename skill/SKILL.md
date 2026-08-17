@@ -26,12 +26,16 @@ Then call the orchestrator:
 | Option | Action |
 |--------|--------|
 | 1 | Generate standardized prompt to paste into external AIs |
-| 2 | Paste one external AI response (repeat up to 4×) |
-| 3 | Check status (how many responses collected) |
-| 4 | Run full pipeline (research + debate + verdict) |
-| 5 | View final report |
+| 2 | ⚡ Fast path — paste all responses now, pipeline runs automatically after |
+| 3 | Paste one external AI response (repeat up to 4×) |
+| 4 | Check status (how many responses collected) |
+| 5 | Run full pipeline (research + debate + verdict) |
+| 6 | View final report |
+| 7 | Exit |
 
-## Pipeline (Option 4)
+Option 2 is the fast path: it asks how many responses you have (2-4), collects each one in a loop, then runs the full pipeline (same as Option 5) and displays the report — no need to return to the menu in between.
+
+## Pipeline (Option 5)
 
 ```
 Phase 1 (parallel): ia-externa ×4  +  pesquisador ×4
@@ -62,18 +66,20 @@ Fontes
   └─ Independent research URLs per agent
 ```
 
-The report is displayed inline in the conversation immediately after generation — no need to use Option 5. The file `outputs/final/relatorio-final.md` is also saved for permanent reference.
+The report is displayed inline in the conversation immediately after generation — no need to use Option 6. The file `outputs/final/relatorio-final.md` is also saved for permanent reference.
 
 ## Agents
 
-| Agent | Role | Calls |
-|-------|------|-------|
-| `orquestrador` | Menu + coordination | entry point |
-| `gerador-prompt` | Generates comparable prompt for external AIs | 1× per topic |
-| `ia-externa` | Structures and evaluates one external AI response | 4× parallel |
-| `pesquisador` | Independent web research (user reports / official / market / risks) | 4× parallel |
-| `mediador-debate` | Convergence/divergence map across all 8 agent outputs | 1× |
-| `juiz` | Independent final verdict with explicit justifications | 2× parallel |
+| Agent | Role | Calls | Browser |
+|-------|------|-------|---------|
+| `orquestrador` | Menu + coordination | entry point | — |
+| `gerador-prompt` | Generates comparable prompt for external AIs | 1× per topic | — |
+| `ia-externa` | Structures and evaluates one external AI response | 4× parallel | — |
+| `pesquisador` | Independent web research (user reports / official / market / risks) | 4× parallel | ✅ |
+| `mediador-debate` | Convergence/divergence map across all 8 agent outputs + tiebreaker searches | 1× | ✅ |
+| `juiz` | Independent final verdict with explicit justifications | 2× parallel | — |
+
+`pesquisador` and `mediador-debate` can use WebSearch, WebFetch, and the local Chrome browser (via Chrome DevTools MCP) — all pre-authorized in `.claude/settings.json`, no permission prompts.
 
 ## Confidence Scale
 

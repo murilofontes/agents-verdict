@@ -13,15 +13,16 @@ Ao iniciar, leia `estado/estado-atual.md` e exiba:
 Tema:      [tema atual ou "nenhum"]
 IAs coladas: [X/4] → [nomes ou "nenhuma"]
 
-1. Novo tema de pesquisa
-2. Colar resposta de IA externa
-3. Ver status
-4. Rodar pipeline completo
-5. Ver relatório final
-6. Sair
+1. Novo tema de pesquisa (gera prompt padronizado)
+2. ⚡ Já tenho os resultados — colar e comparar agora
+3. Colar resposta de IA externa (uma por vez)
+4. Ver status
+5. Rodar pipeline completo
+6. Ver relatório final
+7. Sair
 ```
 
-Aguarde o usuário escolher uma opção e execute o fluxo correspondente. Após cada opção (exceto 6), retorne ao menu.
+Aguarde o usuário escolher uma opção e execute o fluxo correspondente. Após cada opção (exceto 7), retorne ao menu.
 
 ---
 
@@ -52,7 +53,31 @@ Aguarde o usuário escolher uma opção e execute o fluxo correspondente. Após 
 
 ---
 
-## Opção 2 — Colar resposta de IA externa
+## Opção 2 ⚡ — Já tenho os resultados
+
+Fluxo único sem voltar ao menu até o relatório estar pronto.
+
+1. SE `ias_coladas` no estado não está vazio → pergunte: "Arquivar tema anterior '[tema]'? (s/n)"
+   - SE sim: arquive conforme descrito na Opção 1
+
+2. Pergunte: "Qual é o tema ou pergunta de pesquisa?"
+   Determine o tipo (factual/opiniao) automaticamente. Atualize `estado/estado-atual.md`.
+
+3. Pergunte: "Quantas respostas você tem? (2, 3 ou 4)"
+
+4. Para cada resposta (loop até o número informado):
+   - "Qual IA é essa resposta? (ex: ChatGPT, Gemini, Grok, Perplexity, outro)"
+   - "Cole a resposta e diga 'pronto' quando terminar:"
+   - Salve em `inputs/ia-externas/[nome].md` com frontmatter (ia, data, tema)
+   - Confirme: "[X/total] coladas"
+
+5. Após coletar todas → execute automaticamente o pipeline completo (igual à Opção 5):
+   - FASE 1 paralelo, FASE 2 mediador, FASE 3 juízes paralelo, FASE 4 relatório
+   - Exiba o relatório inline ao final (não retorne ao menu antes)
+
+---
+
+## Opção 3 — Colar resposta de IA externa (uma por vez)
 
 1. Verifique o estado. SE já há 4 IAs → "Já temos 4 respostas. Deseja substituir alguma? (indique qual ou 'não')"
 
@@ -81,7 +106,7 @@ Aguarde o usuário escolher uma opção e execute o fluxo correspondente. Após 
 
 ---
 
-## Opção 3 — Status
+## Opção 4 — Status
 
 Leia `estado-atual.md` e exiba:
 - Tema e tipo
@@ -91,7 +116,7 @@ Leia `estado-atual.md` e exiba:
 
 ---
 
-## Opção 4 — Pipeline completo
+## Opção 5 — Pipeline completo
 
 1. Leia o estado. SE menos de 4 respostas coladas → avise: "Apenas [X]/4 respostas. Isso reduz a comparabilidade entre fontes. Continuar mesmo assim? (s/n)"
 
@@ -207,17 +232,17 @@ Compile `outputs/final/relatorio-final.md` com esta estrutura (veredito primeiro
 
 Atualize `estado-atual.md`: `pipeline_executado: true`
 
-Após salvar o arquivo, **exiba o relatório diretamente na conversa** formatado em markdown — não peça ao usuário para usar a Opção 5. Comece pela seção `▶ VEREDITO` em destaque, seguida das evidências. O arquivo salvo serve como referência permanente; a exibição imediata evita uma volta desnecessária ao menu.
+Após salvar o arquivo, **exiba o relatório diretamente na conversa** formatado em markdown — não peça ao usuário para usar a Opção 6. Comece pela seção `▶ VEREDITO` em destaque, seguida das evidências. O arquivo salvo serve como referência permanente; a exibição imediata evita uma volta desnecessária ao menu.
 
 ---
 
-## Opção 5 — Relatório
+## Opção 6 — Relatório
 
 SE `outputs/final/relatorio-final.md` existe → leia o arquivo e exiba o conteúdo completo na conversa, começando pelo bloco `▶ VEREDITO`.  
-SE não existe → "Relatório ainda não gerado. Use a Opção 4 para rodar o pipeline."
+SE não existe → "Relatório ainda não gerado. Use a Opção 5 para rodar o pipeline."
 
 ---
 
-## Opção 6
+## Opção 7
 
 Encerre com: "Até logo!"

@@ -2,6 +2,18 @@
 
 Sistema reutilizável de pesquisa multi-agente com debate e veredito validado. Funciona com qualquer tema.
 
+## Instalação do skill (Claude Code)
+
+```bash
+git clone https://github.com/murilofontes/agents-verdict
+cd agents-verdict
+./install-skill.sh
+# depois, no Claude Code:
+# /reload-skills
+```
+
+O skill fica disponível globalmente como `agents-verdict` e é ativado automaticamente quando você pede pesquisa com múltiplas IAs.
+
 ## Como usar
 
 Abra Claude Code neste diretório e invoque o orquestrador:

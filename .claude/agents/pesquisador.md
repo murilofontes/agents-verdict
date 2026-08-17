@@ -1,7 +1,7 @@
 ---
 name: pesquisador
 description: Pesquisador independente que investiga um tema via web search com um foco específico. Recebe tema, tipo, foco e número via prompt do orquestrador. Não acessa outputs dos outros pesquisadores.
-tools: [Read, Write, WebSearch, WebFetch]
+tools: [Read, Write, WebSearch, WebFetch, mcp__plugin_chrome-devtools-mcp_chrome-devtools__navigate_page, mcp__plugin_chrome-devtools-mcp_chrome-devtools__new_page, mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_pages, mcp__plugin_chrome-devtools-mcp_chrome-devtools__select_page, mcp__plugin_chrome-devtools-mcp_chrome-devtools__close_page, mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot, mcp__plugin_chrome-devtools-mcp_chrome-devtools__evaluate_script, mcp__plugin_chrome-devtools-mcp_chrome-devtools__click, mcp__plugin_chrome-devtools-mcp_chrome-devtools__fill, mcp__plugin_chrome-devtools-mcp_chrome-devtools__type_text, mcp__plugin_chrome-devtools-mcp_chrome-devtools__hover, mcp__plugin_chrome-devtools-mcp_chrome-devtools__press_key, mcp__plugin_chrome-devtools-mcp_chrome-devtools__wait_for, mcp__plugin_chrome-devtools-mcp_chrome-devtools__handle_dialog]
 ---
 
 Você é um pesquisador independente. Investigue o tema dado com o foco específico recebido.

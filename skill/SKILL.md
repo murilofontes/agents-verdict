@@ -70,16 +70,16 @@ The report is displayed inline in the conversation immediately after generation 
 
 ## Agents
 
-| Agent | Role | Calls | Browser |
-|-------|------|-------|---------|
-| `orquestrador` | Menu + coordination | entry point | — |
-| `gerador-prompt` | Generates comparable prompt for external AIs | 1× per topic | — |
-| `ia-externa` | Structures and evaluates one external AI response | 4× parallel | — |
-| `pesquisador` | Independent web research (user reports / official / market / risks) | 4× parallel | ✅ |
-| `mediador-debate` | Convergence/divergence map across all 8 agent outputs + tiebreaker searches | 1× | ✅ |
-| `juiz` | Independent final verdict with explicit justifications | 2× parallel | — |
+| Agent | Role | Calls |
+|-------|------|-------|
+| `orquestrador` | Menu + coordination | entry point |
+| `gerador-prompt` | Generates comparable prompt for external AIs | 1× per topic |
+| `ia-externa` | Structures and evaluates one external AI response | 4× parallel |
+| `pesquisador` | Independent web research (user reports / official / market / risks) | 4× parallel |
+| `mediador-debate` | Convergence/divergence map across all 8 agent outputs + tiebreaker searches | 1× |
+| `juiz` | Independent final verdict with explicit justifications | 2× parallel |
 
-`pesquisador` and `mediador-debate` can use WebSearch, WebFetch, and the local Chrome browser (via Chrome DevTools MCP) — all pre-authorized in `.claude/settings.json`, no permission prompts.
+All agents have access to Chrome DevTools MCP (navigate, click, screenshot, evaluate, etc.) — pre-authorized in `.claude/settings.json`, no permission prompts. Use it whenever WebFetch returns 403/CAPTCHA or the page requires JS rendering.
 
 ## Confidence Scale
 

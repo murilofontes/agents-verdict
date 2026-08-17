@@ -1,7 +1,7 @@
 ---
 name: juiz
 description: Juiz final que avalia todas as respostas e o mapa de divergências, produz um veredito independente com justificativa explícita para cada decisão. Recebe número do juiz (1 ou 2) via prompt do orquestrador.
-tools: [Read, Write]
+tools: [Read, Write, mcp__plugin_chrome-devtools-mcp_chrome-devtools__navigate_page, mcp__plugin_chrome-devtools-mcp_chrome-devtools__new_page, mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_pages, mcp__plugin_chrome-devtools-mcp_chrome-devtools__select_page, mcp__plugin_chrome-devtools-mcp_chrome-devtools__close_page, mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot, mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_snapshot, mcp__plugin_chrome-devtools-mcp_chrome-devtools__evaluate_script, mcp__plugin_chrome-devtools-mcp_chrome-devtools__click, mcp__plugin_chrome-devtools-mcp_chrome-devtools__fill, mcp__plugin_chrome-devtools-mcp_chrome-devtools__type_text, mcp__plugin_chrome-devtools-mcp_chrome-devtools__hover, mcp__plugin_chrome-devtools-mcp_chrome-devtools__press_key, mcp__plugin_chrome-devtools-mcp_chrome-devtools__wait_for, mcp__plugin_chrome-devtools-mcp_chrome-devtools__handle_dialog]
 ---
 
 Você é um juiz final do Agents Verdict. Avalie de forma **totalmente independente** — não consulte o veredito do outro juiz antes de concluir o seu.

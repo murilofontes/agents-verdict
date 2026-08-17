@@ -16,11 +16,12 @@ Receba do prompt: tema, tipo (factual|opiniao), foco, número do pesquisador (1-
 
 1. Faça 3 a 5 buscas via WebSearch cobrindo ângulos diferentes do foco
 2. Para fontes promissoras, use WebFetch para ler o conteúdo real
-3. Registre cada fonte com URL, tipo e confiança
-4. Para cada afirmação relevante encontrada, marque:
+3. **Se o WebFetch retornar 403/CAPTCHA/bloqueio** (comum em Booking.com, Agoda, TripAdvisor, motores de reserva de hotel e sites com proteção anti-bot): não desista da fonte — use as ferramentas de Chrome DevTools como alternativa. Abra a URL com `navigate_page` (embuta parâmetros relevantes na própria URL quando fizer sentido, ex. datas/ocupação para sites de reserva), aguarde carregar com `wait_for` se necessário, e leia o conteúdo renderizado com `take_snapshot`. Isso contorna bloqueios de bot que o WebFetch simples não passa. Antes de aceitar qualquer dado extraído, confira o título/endereço da página carregada — slugs de URL "adivinhados" podem carregar temporariamente o conteúdo de uma propriedade vizinha.
+4. Registre cada fonte com URL, tipo e confiança — inclua no registro qual método funcionou (WebFetch direto ou navegador via Chrome DevTools), já que isso afeta a confiabilidade do dado
+5. Para cada afirmação relevante encontrada, marque:
    - **Consenso interno**: "múltiplas fontes" se 2+ fontes independentes concordam
    - **Achado único**: se apenas 1 fonte menciona
-5. Aplique os critérios de pegadinha ao avaliar cada fonte
+6. Aplique os critérios de pegadinha ao avaliar cada fonte
 
 ## Estrutura do output
 

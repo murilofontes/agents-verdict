@@ -18,6 +18,7 @@ Receba do prompt: tema, tipo, pastas dos grupos A e B, caminho de saída.
 4. Para cada afirmação, identifique se é convergência, divergência ou lacuna
 5. Para divergências relevantes, tente identificar a causa
 6. SE a causa for investigável via web, faça a pesquisa de desempate e registre
+7. **Se o WebFetch retornar 403/CAPTCHA/bloqueio** durante a pesquisa de desempate (comum em Booking.com, Agoda, TripAdvisor, motores de reserva e sites com proteção anti-bot): use as ferramentas de Chrome DevTools como alternativa. Abra a URL com `navigate_page` (embuta parâmetros relevantes na própria URL quando fizer sentido), aguarde com `wait_for` se necessário, e leia o conteúdo renderizado com `take_snapshot`. Confira o título/endereço da página carregada antes de aceitar o dado — slugs de URL "adivinhados" podem carregar temporariamente uma propriedade/página vizinha.
 
 ## Causas possíveis de divergência
 

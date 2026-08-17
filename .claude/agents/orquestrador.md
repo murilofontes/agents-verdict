@@ -143,73 +143,77 @@ Compare as seções "Decisões sobre Divergências" dos dois juízes:
 - Pontos em que concordam → veredito unânime
 - Pontos em que divergem → "Ponto em aberto entre os juízes"
 
-Compile `outputs/final/relatorio-final.md` com esta estrutura:
+Compile `outputs/final/relatorio-final.md` com esta estrutura (veredito primeiro, evidências depois):
 
 ```markdown
-# Relatório Final — Agents Verdict
-**Tema:** [tema]
-**Tipo:** [factual|opiniao]
-**Data:** [data]
-**IAs consultadas:** [lista]
-**Pesquisadores:** 4 (relatos, oficial, mercado, riscos)
+# Agents Verdict — [tema]
+*[data] · [tipo] · [X] fontes externas + 4 pesquisadores independentes*
 
 ---
 
-## Resposta Consolidada
-[Síntese das afirmações com confiança 🟢 ou 🟡 onde ambos os juízes concordam. Máximo de clareza, sem redundância.]
+## ▶ VEREDITO
+
+> [2-4 frases diretas com a conclusão principal. Sem hedge desnecessário. Se o consenso for claro, diga claramente. Se houver incerteza genuína, diga isso também.]
+
+**Confiança geral:** [🟢 Alta / 🟡 Média / 🔴 Baixa]  
+**Consenso entre juízes:** [Unânime / Divergência em X pontos — ver seção abaixo]
+
+### Pontos-chave
+
+| # | Afirmação | Confiança | Base |
+|---|-----------|-----------|------|
+| 1 | [afirmação mais importante] | 🟢/🟡/🔴 | [agentes que sustentam] |
+| 2 | ... | | |
+
+*(Apenas afirmações 🟢 e 🟡 aparecem aqui. Afirmações 🔴 ficam na seção de Evidências.)*
 
 ---
 
-## Tabela de Afirmações
+## Evidências e Análise
 
-| Afirmação | Grupo A | Grupo B | Juízes | Confiança Final |
-|-----------|---------|---------|--------|-----------------|
+### Tabela completa de afirmações
 
----
+| Afirmação | IAs externas | Pesquisa independente | Juízes | Confiança final |
+|-----------|-------------|----------------------|--------|-----------------|
 
-## Divergências Resolvidas
+### Divergências resolvidas
 
-| # | Divergência | Veredito | Critério usado | Confiança |
-|---|-------------|----------|----------------|-----------|
+| # | Divergência | Veredito | Critério | Confiança |
+|---|-------------|----------|----------|-----------|
 
----
-
-## Pontos em Aberto (juízes divergem)
+### Pontos em aberto entre os juízes
 
 | Ponto | Argumento Juiz 1 | Argumento Juiz 2 |
 |-------|-----------------|-----------------|
 
-*(Seção omitida se não houver divergências entre os juízes)*
+*(Seção omitida se os juízes concordaram em tudo)*
 
 ---
 
-## Fontes por Agente
+## Fontes
 
-### Pesquisador 1 — Relatos de usuários
-[lista de URLs com título e confiança]
+### IAs externas consultadas
+[lista: nome da IA, confiança geral atribuída pelo Grupo A]
 
-### Pesquisador 2 — Dados oficiais
-[lista de URLs com título e confiança]
-
-### Pesquisador 3 — Mercado/preços
-[lista de URLs com título e confiança]
-
-### Pesquisador 4 — Riscos
-[lista de URLs com título e confiança]
-
-### Mediador — Pesquisas de desempate
-[lista de URLs usadas para dirimir divergências, se houver]
+### Pesquisa independente
+| Agente | Foco | URLs consultadas |
+|--------|------|-----------------|
+| Pesquisador 1 | Relatos de usuários | [URLs] |
+| Pesquisador 2 | Dados oficiais | [URLs] |
+| Pesquisador 3 | Mercado/preços | [URLs] |
+| Pesquisador 4 | Riscos | [URLs] |
+| Mediador | Desempate | [URLs, se houver] |
 ```
 
 Atualize `estado-atual.md`: `pipeline_executado: true`
 
-Informe: "Pipeline concluído! Use a Opção 5 para ver o relatório."
+Após salvar o arquivo, **exiba o relatório diretamente na conversa** formatado em markdown — não peça ao usuário para usar a Opção 5. Comece pela seção `▶ VEREDITO` em destaque, seguida das evidências. O arquivo salvo serve como referência permanente; a exibição imediata evita uma volta desnecessária ao menu.
 
 ---
 
 ## Opção 5 — Relatório
 
-SE `outputs/final/relatorio-final.md` existe → exiba o conteúdo completo.
+SE `outputs/final/relatorio-final.md` existe → leia o arquivo e exiba o conteúdo completo na conversa, começando pelo bloco `▶ VEREDITO`.  
 SE não existe → "Relatório ainda não gerado. Use a Opção 4 para rodar o pipeline."
 
 ---

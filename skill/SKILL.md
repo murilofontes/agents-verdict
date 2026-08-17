@@ -38,7 +38,31 @@ Phase 1 (parallel): ia-externa ×4  +  pesquisador ×4
 Phase 2:            mediador-debate  →  divergence map
 Phase 3 (parallel): juiz ×2  →  independent verdicts
 Phase 4:            compile relatorio-final.md
+Phase 5:            display report inline (verdict first, evidence after)
 ```
+
+## Report Structure
+
+The final report always opens with the verdict block:
+
+```
+▶ VEREDITO
+  └─ 2-4 sentence conclusion
+  └─ Overall confidence: 🟢/🟡/🔴
+  └─ Judge consensus: unanimous / X open points
+  └─ Key claims table (🟢🟡 only)
+
+Evidências e Análise
+  └─ Full claims table (all confidence levels)
+  └─ Resolved divergences + criterion used
+  └─ Open points between judges (if any)
+
+Fontes
+  └─ External AIs + confidence ratings
+  └─ Independent research URLs per agent
+```
+
+The report is displayed inline in the conversation immediately after generation — no need to use Option 5. The file `outputs/final/relatorio-final.md` is also saved for permanent reference.
 
 ## Agents
 

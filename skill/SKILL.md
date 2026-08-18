@@ -5,103 +5,113 @@ description: Use when the user wants to research any topic with multiple AI sour
 
 # Agents Verdict
 
-Multi-agent research system that debates AI responses and independent web research to produce a validated, confidence-tagged final report.
+Multi-agent research system that runs two independent research teams, debates results (including external AI responses), and produces a validated confidence-tagged report with a mandatory acionável recommendation.
 
-## How to Invoke
+## Pré-requisitos
 
-Open Claude Code in the project directory:
+### Claude in Chrome (navegação real, menos detectável)
+1. Instale a extensão **Claude for Chrome** na Chrome Web Store
+2. Na primeira vez: `claude --chrome` — instala o native messaging host
+3. Reinicie o Chrome se a extensão não for detectada
+
+> Sem isso, os agentes usam Chrome DevTools MCP como fallback (Chrome isolado, mais detectável)
+
+## Como invocar
 
 ```bash
 cd ~/Documents/Claude/Projects/agents-verdict
 ```
 
-Then call the orchestrator:
-
 ```
 @orquestrador
 ```
 
-## Menu Options
-
-| Option | Action |
-|--------|--------|
-| 1 | Generate standardized prompt to paste into external AIs |
-| 2 | ⚡ Fast path — paste all responses now, pipeline runs automatically after |
-| 3 | Paste one external AI response (repeat up to 4×) |
-| 4 | Check status (how many responses collected) |
-| 5 | Run full pipeline (research + debate + verdict) |
-| 6 | View final report |
-| 7 | Exit |
-
-Option 2 is the fast path: it asks how many responses you have (2-4), collects each one in a loop, then runs the full pipeline (same as Option 5) and displays the report — no need to return to the menu in between.
-
-## Pipeline (Option 5)
+## Menu
 
 ```
-Phase 1 (parallel): ia-externa ×4  +  pesquisador ×4
-Phase 2:            mediador-debate  →  divergence map
-Phase 3 (parallel): juiz ×2  →  independent verdicts
-Phase 4:            compile relatorio-final.md
-Phase 5:            display report inline (verdict first, evidence after)
+╔══════════════════════════════════════════╗
+║           🔬  AGENTS VERDICT             ║
+╚══════════════════════════════════════════╝
+
+  1  📝  Novo tema — gerar prompt para IAs
+  2  ⚡  Tenho resultados — analisar agora
+  3  ➕  Colar resposta de IA (uma por vez)
+  4  📊  Ver status atual
+  5  🚀  Rodar pipeline completo
+  6  📄  Ver relatório final
+  7  🚪  Sair
 ```
 
-## Report Structure
+Opção 2 é o fast path: coleta 0-4 respostas de IAs (0 = só pesquisa independente) e dispara o pipeline completo automaticamente.
 
-The final report always opens with the verdict block:
+## Pipeline (Opção 5)
+
+```
+Phase 1 (paralelo — até 12 agentes):
+  Equipe Alpha: pesquisador ×4  → outputs/grupo-alpha/
+  Equipe Beta:  pesquisador ×4  → outputs/grupo-beta/
+  IAs externas: ia-externa ×N   → outputs/grupo-ia/
+
+Phase 2: mediador-debate → mapa de divergências
+Phase 3 (paralelo): juiz ×3 → vereditos independentes
+Phase 4: orquestrador compila + publica artifact HTML
+```
+
+## Relatório (artifact HTML)
 
 ```
 ▶ VEREDITO
-  └─ 2-4 sentence conclusion
-  └─ Overall confidence: 🟢/🟡/🔴
-  └─ Judge consensus: unanimous / X open points
-  └─ Key claims table (🟢🟡 only)
+  └─ Conclusão em 2-4 frases
+  └─ ⭐ Recomendação acionável obrigatória
+  └─ Tabela comparativa de candidatos (preço, nota, atributos)
+  └─ Confiança geral + consenso X/3 juízes
 
-Evidências e Análise
-  └─ Full claims table (all confidence levels)
-  └─ Resolved divergences + criterion used
-  └─ Open points between judges (if any)
+Perspectiva dos Juízes
+  └─ ⚖️ Magistrado Pragmático   [avatar + balão de fala]
+  └─ 🔍 Árbitro Conservador     [avatar + balão de fala]
+  └─ 🎯 Mediador Ousado         [avatar + balão de fala]
+
+Equipes de Pesquisa
+  └─ Alpha (azul): 👤📰💰⚠️
+  └─ Beta (verde): 👤📰💰⚠️
+
+IAs Externas Consultadas
+  └─ Cards com confiança por IA
+
+Evidências (colapsável)
+  └─ Tabela completa de afirmações (Alpha | Beta | IAs | Juízes)
+  └─ Divergências resolvidas
+  └─ Pontos em aberto entre juízes (se houver)
 
 Fontes
-  └─ External AIs + confidence ratings
-  └─ Independent research URLs per agent
+  └─ 8 pesquisadores com URLs consultadas
 ```
 
-The report is displayed inline in the conversation immediately after generation — no need to use Option 6. The file `outputs/final/relatorio-final.md` is also saved for permanent reference.
+## Agentes
 
-## Agents
+| Agente | Persona | Papel | Chamadas |
+|--------|---------|-------|---------|
+| `orquestrador` | — | Menu + coordenação + veredito final + artifact | entry point |
+| `gerador-prompt` | — | Prompt padronizado para IAs externas | 1× |
+| `ia-externa` | — | Estrutura e avalia resposta de IA | 0-4× |
+| `pesquisador` | 👤📰💰⚠️ | Pesquisa independente por foco | 8× (4 Alpha + 4 Beta) |
+| `mediador-debate` | — | Mapa de divergências entre todas as fontes | 1× |
+| `juiz` | ⚖️🔍🎯 | Veredito independente + recomendação acionável obrigatória | 3× |
 
-| Agent | Role | Calls |
-|-------|------|-------|
-| `orquestrador` | Menu + coordination | entry point |
-| `gerador-prompt` | Generates comparable prompt for external AIs | 1× per topic |
-| `ia-externa` | Structures and evaluates one external AI response | 4× parallel |
-| `pesquisador` | Independent web research (user reports / official / market / risks) | 4× parallel |
-| `mediador-debate` | Convergence/divergence map across all 8 agent outputs + tiebreaker searches | 1× |
-| `juiz` | Independent final verdict with explicit justifications | 2× parallel |
-
-All agents have access to two browser methods — pre-authorized in `.claude/settings.json`, no permission prompts:
+## Browser
 
 | Método | Quando usar |
 |--------|------------|
-| **Claude in Chrome** (`mcp__claude-in-chrome__*`) | **Principal** — conecta ao Chrome real do usuário (com cookies/sessão), menos detectável por anti-bot. Sequência: `list_connected_browsers` → `select_browser` → `tabs_context_mcp` → `navigate` → `get_page_text` → `tabs_close_mcp` |
-| **Chrome DevTools MCP** (`mcp__plugin_chrome-devtools-mcp_chrome-devtools__*`) | **Fallback** — abre Chrome isolado próprio. Usar se Claude in Chrome estiver indisponível |
+| **Claude in Chrome** (`mcp__claude-in-chrome__*`) | **Principal** — Chrome real do usuário, menos detectável. `list_connected_browsers` → `select_browser` → `tabs_context_mcp` → `navigate` → `get_page_text` → `tabs_close_mcp` |
+| **Chrome DevTools MCP** (`mcp__plugin_chrome-devtools-mcp_chrome-devtools__*`) | **Fallback** — Chrome isolado. Usar se Claude in Chrome indisponível |
 
-Ambos são acionados automaticamente quando WebFetch retorna 403/CAPTCHA ou a página exige JS.
+Ambos pré-autorizados em `.claude/settings.json` — sem prompts de permissão.
 
-## Confidence Scale
+## Reutilizar para novo tema
 
-| Icon | Level | Criteria |
-|------|-------|----------|
-| 🟢 | High | 3+ independent sources converge, no red flags |
-| 🟡 | Medium | 1-2 sources or minor flag |
-| 🔴 | Low | Single source, red flag, or unverifiable |
-| ⚪ | N/A | Subjective opinion |
+Opção 1 do menu — o sistema pergunta se quer arquivar o tema anterior.
 
-## Reusing for a New Topic
+## Projeto
 
-Choose Option 1 from the menu — the orchestrator asks whether to archive the previous research before starting fresh.
-
-## Project Location
-
-`~/Documents/Claude/Projects/agents-verdict/`  
+`~/Documents/Claude/Projects/agents-verdict/`
 GitHub: https://github.com/murilofontes/agents-verdict

@@ -8,11 +8,11 @@ Você é o mediador de debate do Agents Verdict. Analise os 8 outputs (4 do Grup
 
 **Antes de começar, leia `criterios/avaliacao.md`.**
 
-Receba do prompt: tema, tipo, pastas dos grupos A e B, caminho de saída.
+Receba do prompt: tema, tipo, pastas grupo-alpha, grupo-beta, grupo-ia, caminho de saída.
 
 ## Processo
 
-1. Leia todos os arquivos em `outputs/grupo-a/` e `outputs/grupo-b/`
+1. Leia todos os arquivos em `outputs/grupo-alpha/`, `outputs/grupo-beta/` e `outputs/grupo-ia/` (pode estar vazia se não há IAs externas)
 2. Extraia todas as afirmações de todos os agentes
 3. Agrupe por tema/subtema
 4. Para cada afirmação, identifique se é convergência, divergência ou lacuna

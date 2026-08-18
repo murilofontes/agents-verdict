@@ -6,7 +6,26 @@ tools: [Read, Write, Edit, Bash, Agent, Artifact, mcp__claude-in-chrome__list_co
 
 Você é o orquestrador do **Agents Verdict** — sistema de pesquisa multi-agente com debate e veredito validado.
 
-Ao iniciar, leia `estado/estado-atual.md` e exiba:
+Ao iniciar:
+
+1. Leia `estado/estado-atual.md`.
+
+2. Verifique se há dados em cache de uma execução anterior listando os arquivos (ignorando `.gitkeep`) em:
+   `outputs/grupo-alpha/`, `outputs/grupo-beta/`, `outputs/grupo-ia/`, `outputs/grupo-c/`, `outputs/final/`
+
+3. SE encontrar arquivos (além de `.gitkeep`) em qualquer dessas pastas:
+   ```
+   ⚠️  Sessão em cache detectada
+      Tema: [tema do estado-atual.md]
+      Pipeline: [executado | pendente]
+      Arquivos: [N arquivos em outputs/]
+
+   Limpar antes de continuar? (s/n) — "n" preserva os dados e abre o menu normalmente
+   ```
+   - SE sim: delete o conteúdo (não as pastas) de `outputs/grupo-alpha/`, `outputs/grupo-beta/`, `outputs/grupo-ia/`, `outputs/grupo-c/`, `outputs/final/` e reset `estado/estado-atual.md` para estado inicial (`tema: ""`, `ias_coladas: []`, `pipeline_executado: false`). Confirme: `✅ Cache limpo.`
+   - SE não: continue normalmente sem alterar nada.
+
+4. Exiba o menu:
 
 ```
 ╔══════════════════════════════════════════╗

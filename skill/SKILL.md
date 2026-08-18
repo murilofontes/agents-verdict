@@ -79,7 +79,14 @@ The report is displayed inline in the conversation immediately after generation 
 | `mediador-debate` | Convergence/divergence map across all 8 agent outputs + tiebreaker searches | 1× |
 | `juiz` | Independent final verdict with explicit justifications | 2× parallel |
 
-All agents have access to Chrome DevTools MCP (navigate, click, screenshot, evaluate, etc.) — pre-authorized in `.claude/settings.json`, no permission prompts. Use it whenever WebFetch returns 403/CAPTCHA or the page requires JS rendering.
+All agents have access to two browser methods — pre-authorized in `.claude/settings.json`, no permission prompts:
+
+| Método | Quando usar |
+|--------|------------|
+| **Claude in Chrome** (`mcp__claude-in-chrome__*`) | **Principal** — conecta ao Chrome real do usuário (com cookies/sessão), menos detectável por anti-bot. Sequência: `list_connected_browsers` → `select_browser` → `tabs_context_mcp` → `navigate` → `get_page_text` → `tabs_close_mcp` |
+| **Chrome DevTools MCP** (`mcp__plugin_chrome-devtools-mcp_chrome-devtools__*`) | **Fallback** — abre Chrome isolado próprio. Usar se Claude in Chrome estiver indisponível |
+
+Ambos são acionados automaticamente quando WebFetch retorna 403/CAPTCHA ou a página exige JS.
 
 ## Confidence Scale
 

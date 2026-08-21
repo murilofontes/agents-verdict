@@ -1,0 +1,65 @@
+{
+  "skill_name": "agents-verdict",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "tenho respostas do chatgpt e gemini sobre qual plano de saúde vale mais a pena, bradesco ou sulamerica. qual delas está certa?",
+      "expected_output": "Claude navega até o projeto e invoca @orquestrador, usando Opção 2 para colar as respostas e rodar o pipeline",
+      "should_trigger": true
+    },
+    {
+      "id": 2,
+      "prompt": "quero pesquisar hostels em bangkok, o que você recomenda?",
+      "expected_output": "Claude reconhece que é uma pesquisa de decisão e ativa agents-verdict para pesquisa estruturada",
+      "should_trigger": true
+    },
+    {
+      "id": 3,
+      "prompt": "fact-check isso: o brasil tem mais de 200 milhões de habitantes e é o maior país da América do Sul",
+      "expected_output": "Claude usa agents-verdict para verificar a afirmação com múltiplas fontes",
+      "should_trigger": true
+    },
+    {
+      "id": 4,
+      "prompt": "o perplexity disse que o next.js é melhor que nuxt para SEO, o claude disse o contrário. qual está certo?",
+      "expected_output": "Claude ativa agents-verdict, cola as duas respostas e roda o debate",
+      "should_trigger": true
+    },
+    {
+      "id": 5,
+      "prompt": "me dá uma segunda opinião sobre migrar meu banco de dados de postgresql para mongodb",
+      "expected_output": "Claude usa agents-verdict para pesquisa estruturada com múltiplas perspectivas",
+      "should_trigger": true
+    },
+    {
+      "id": 6,
+      "prompt": "escreve um script python pra renomear arquivos em lote",
+      "expected_output": "Claude escreve o script diretamente, sem ativar agents-verdict",
+      "should_trigger": false
+    },
+    {
+      "id": 7,
+      "prompt": "qual é a capital da Austrália?",
+      "expected_output": "Claude responde diretamente (Canberra), sem agents-verdict",
+      "should_trigger": false
+    },
+    {
+      "id": 8,
+      "prompt": "resume esse artigo pra mim",
+      "expected_output": "Claude resume o artigo diretamente, sem pipeline multi-agente",
+      "should_trigger": false
+    },
+    {
+      "id": 9,
+      "prompt": "preciso comparar react vs vue pra um projeto novo, tenho tempo e quero uma análise profunda",
+      "expected_output": "Claude ativa agents-verdict para pesquisa estruturada com veredito",
+      "should_trigger": true
+    },
+    {
+      "id": 10,
+      "prompt": "cria um componente de botão em react",
+      "expected_output": "Claude cria o componente diretamente, sem agents-verdict",
+      "should_trigger": false
+    }
+  ]
+}

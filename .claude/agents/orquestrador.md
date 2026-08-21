@@ -11,7 +11,7 @@ Ao iniciar:
 1. Leia `estado/estado-atual.md`.
 
 2. Verifique se há dados em cache de uma execução anterior listando os arquivos (ignorando `.gitkeep`) em:
-   `outputs/grupo-alpha/`, `outputs/grupo-beta/`, `outputs/grupo-ia/`, `outputs/grupo-c/`, `outputs/final/`
+   `outputs/grupo-alpha/`, `outputs/grupo-beta/`, `outputs/grupo-ia/`, `outputs/funil/`, `outputs/grupo-c/`, `outputs/final/`
 
 3. SE encontrar arquivos (além de `.gitkeep`) em qualquer dessas pastas:
    ```
@@ -22,7 +22,7 @@ Ao iniciar:
 
    Limpar antes de continuar? (s/n) — "n" preserva os dados e abre o menu normalmente
    ```
-   - SE sim: delete o conteúdo (não as pastas) de `outputs/grupo-alpha/`, `outputs/grupo-beta/`, `outputs/grupo-ia/`, `outputs/grupo-c/`, `outputs/final/` e reset `estado/estado-atual.md` para estado inicial (`tema: ""`, `ias_coladas: []`, `pipeline_executado: false`). Confirme: `✅ Cache limpo.`
+   - SE sim: delete o conteúdo (não as pastas) de `outputs/grupo-alpha/`, `outputs/grupo-beta/`, `outputs/grupo-ia/`, `outputs/funil/`, `outputs/grupo-c/`, `outputs/final/` e reset `estado/estado-atual.md` para estado inicial (`tema: ""`, `ias_coladas: []`, `pipeline_executado: false`). Confirme: `✅ Cache limpo.`
    - SE não: continue normalmente sem alterar nada.
 
 4. Exiba o menu:
@@ -155,6 +155,11 @@ Leia `estado-atual.md` e exiba com emojis de progresso:
   🤖 IAs: [nomes das IAs coladas]
 
   ⏳ [N] agentes rodando em paralelo...
+
+  Fase 1.5 → ⚗️  Funil seleciona finalistas + aprofundamento paralelo
+  Fase 2    → ⚔️  Mediador mapeia convergências e divergências
+  Fase 3    → ⚖️  3 juízes deliberam com perfis enriquecidos
+  Fase 4    → 📝 Orquestrador emite veredito acionável
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -186,6 +191,42 @@ Aguarde todos concluírem. Exiba: `✅ [N] investigações concluídas.`
 
 ---
 
+### FASE 1.5 — Funil (seleção e aprofundamento de finalistas)
+
+Exiba:
+```
+⚗️  Funil analisando [N] relatórios para eleger finalistas...
+```
+
+**Passo A — Seleção:** Invoque o agente `pesquisador-funil`:
+```
+Tema: "[tema]". Tipo: [tipo].
+Pasta Alpha: outputs/grupo-alpha/
+Pasta Beta: outputs/grupo-beta/
+Salve em outputs/funil/selecao.md
+```
+
+Aguarde. Leia `outputs/funil/selecao.md`. Exiba:
+```
+🎯 Finalistas selecionados: [N] candidatos
+   • [candidato 1] — score [X]
+   • [candidato 2] — score [X]
+   ...
+
+⚡ Aprofundando em paralelo...
+```
+
+**Passo B — Aprofundamento paralelo:** Para cada finalista em `selecao.md`, invoque simultaneamente o agente `pesquisador-aprofundador`:
+```
+Candidato: "[nome]". Tema: "[tema]". Tipo: [tipo].
+Ângulos prioritários: [lista de ângulos cegos do selecao.md para este candidato]
+Salve em outputs/funil/[slug-candidato]-aprofundado.md
+```
+
+Aguarde todos. Exiba: `✅ Aprofundamento concluído — [N] perfis enriquecidos.`
+
+---
+
 ### FASE 2 — Mediador
 
 Exiba: `⚔️  Mediador analisando convergências e divergências entre equipes...`
@@ -196,6 +237,7 @@ Tema: "[tema]". Tipo: [tipo].
 Arquivos Alpha: outputs/grupo-alpha/
 Arquivos Beta: outputs/grupo-beta/
 Arquivos IAs: outputs/grupo-ia/ (pode estar vazia se não houver IAs)
+Arquivos Funil: outputs/funil/ (inclui selecao.md + perfis aprofundados — use como fonte primária para os finalistas)
 Salve o mapa em outputs/grupo-c/mapa-divergencias.md
 ```
 
@@ -228,9 +270,9 @@ data: [YYYY-MM-DD HH:MM]
 Exiba: `⚖️  3 juízes deliberando independentemente...`
 
 Invoque simultaneamente:
-- Agente `juiz`, prompt: `Juiz número: 1. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-1-veredito.md`
-- Agente `juiz`, prompt: `Juiz número: 2. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-2-veredito.md`
-- Agente `juiz`, prompt: `Juiz número: 3. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-3-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 1. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/funil/ (perfis aprofundados dos finalistas — priorize esses dados sobre os da Fase 1), outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-1-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 2. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/funil/ (perfis aprofundados dos finalistas — priorize esses dados sobre os da Fase 1), outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-2-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 3. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/funil/ (perfis aprofundados dos finalistas — priorize esses dados sobre os da Fase 1), outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-3-veredito.md`
 
 Aguarde ambos. Exiba: `✅ 3 vereditos recebidos.`
 

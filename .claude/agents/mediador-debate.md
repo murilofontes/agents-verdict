@@ -67,10 +67,19 @@ Receba do prompt: tema, tipo, pastas grupo-alpha, grupo-beta, grupo-ia, caminho 
 
 ## Pesquisa de Desempate
 
-(Apenas para divergências onde a causa é investigável)
+(Apenas para divergências onde a causa é investigável via web)
 
 | Divergência # | Busca realizada | Resultado | Fonte | Confiança |
 |---------------|----------------|-----------|-------|-----------|
+
+## Perguntas para o Usuário
+
+(Seção opcional — inclua SOMENTE se houver divergências que dependem de preferências do usuário para serem resolvidas e que a pesquisa web não conseguiu resolver. Se tudo foi resolvido pela pesquisa, omita a seção inteiramente.)
+
+| # | Pergunta | Por que importa | Divergência relacionada |
+|---|---------|-----------------|------------------------|
+
+(Máximo 3 perguntas. Exemplos de quando usar: preferência de preço vs. localização, conforto vs. aventura, nível de risco aceitável. Não use para divergências factuais — essas devem ser resolvidas pela pesquisa.)
 ```
 
 Salve no caminho de saída informado pelo orquestrador.

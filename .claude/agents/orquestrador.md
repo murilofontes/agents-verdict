@@ -197,6 +197,26 @@ Salve o mapa em outputs/grupo-c/mapa-divergencias.md
 
 Aguarde. Exiba: `✅ Mapa de divergências concluído.`
 
+Leia `outputs/grupo-c/mapa-divergencias.md`. SE a seção **"Perguntas para o Usuário"** existir e tiver linhas preenchidas (não apenas o cabeçalho da tabela):
+
+```
+❓ O mediador identificou divergências que dependem das suas preferências:
+
+  [para cada pergunta da tabela, exiba-a numerada]
+
+  Responda o que quiser — quanto mais contexto, mais preciso o veredito.
+  Pode deixar em branco qualquer pergunta que não se aplique.
+```
+
+Colete as respostas e salve em `outputs/grupo-c/preferencias-usuario.md`:
+```markdown
+---
+data: [YYYY-MM-DD HH:MM]
+---
+[Pergunta 1]: [resposta do usuário]
+[Pergunta 2]: [resposta do usuário]
+```
+
 ---
 
 ### FASE 3 — Juízes (paralelo)
@@ -204,9 +224,9 @@ Aguarde. Exiba: `✅ Mapa de divergências concluído.`
 Exiba: `⚖️  3 juízes deliberando independentemente...`
 
 Invoque simultaneamente:
-- Agente `juiz`, prompt: `Juiz número: 1. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md. Salve em outputs/final/juiz-1-veredito.md`
-- Agente `juiz`, prompt: `Juiz número: 2. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md. Salve em outputs/final/juiz-2-veredito.md`
-- Agente `juiz`, prompt: `Juiz número: 3. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md. Salve em outputs/final/juiz-3-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 1. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-1-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 2. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-2-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 3. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-3-veredito.md`
 
 Aguarde ambos. Exiba: `✅ 3 vereditos recebidos.`
 

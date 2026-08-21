@@ -36,6 +36,8 @@ Receba do prompt: tema, tipo (factual|opiniao), equipe (alpha|beta), foco, núme
    - **Consenso interno**: "múltiplas fontes" se 2+ fontes independentes concordam
    - **Achado único**: se apenas 1 fonte menciona
 6. Aplique os critérios de pegadinha ao avaliar cada fonte
+7. **Registre também os candidatos que você considerou e descartou/rebaixou, com o motivo** — não reporte só os aprovados. Isso permite ao usuário auditar o que foi excluído e por quê.
+8. Quando o tema listar um atributo como "diferencial"/"bônus"/"desempate" (não como critério obrigatório), NUNCA descarte ou rebaixe um candidato só por não ter esse atributo — ver `criterios/avaliacao.md` § "Diferencial vs. critério obrigatório".
 
 ## Estrutura do output
 

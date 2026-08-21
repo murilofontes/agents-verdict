@@ -164,6 +164,8 @@ Leia `estado-atual.md` e exiba com emojis de progresso:
 
 Invoque simultaneamente via Agent tool:
 
+Cada prompt de pesquisador deve terminar com o lembrete: `Documente também os candidatos descartados/rebaixados com o motivo (seção "Descartados/Rebaixados" no seu output). Se o tema listar algum atributo como "diferencial"/"bônus"/"desempate", NUNCA descarte um candidato só por não ter esse atributo — ver criterios/avaliacao.md.`
+
 **Equipe Alpha (4 pesquisadores):**
 - Prompt 1: `Tema: "[tema]". Tipo: [tipo]. Equipe: alpha. Foco: relatos de usuários, fóruns, experiências pessoais. Pesquisador número: 1. Salve em outputs/grupo-alpha/pesquisador-1-relatos.md`
 - Prompt 2: `Tema: "[tema]". Tipo: [tipo]. Equipe: alpha. Foco: dados oficiais, fontes técnicas, documentação primária. Pesquisador número: 2. Salve em outputs/grupo-alpha/pesquisador-2-oficial.md`
@@ -172,6 +174,8 @@ Invoque simultaneamente via Agent tool:
 
 **Equipe Beta (4 pesquisadores — focos idênticos, buscas independentes):**
 - Prompt 1-4: igual ao Alpha mas com `Equipe: beta` e pasta `outputs/grupo-beta/`
+
+**Antes de disparar a Fase 1, se o tema tiver um teto numérico (orçamento, prazo, capacidade) junto de um alvo de qualidade (nota mínima, nível "premium"/"wow", certificação) que pareçam conflitantes com base no seu conhecimento geral do mercado, avise o usuário disso e pergunte se o teto é rígido ou flexível antes de gastar os 8 agentes — é mais barato perguntar uma vez do que rodar o pipeline inteiro sobre uma suposição errada.**
 
 **IAs externas (uma por arquivo colado, se houver):**
 - Para cada arquivo em `inputs/ia-externas/[nome].md`:
@@ -287,6 +291,13 @@ Leia `outputs/final/juiz-1-veredito.md`, `juiz-2-veredito.md`, `juiz-3-veredito.
 
 | # | Divergência | Veredito | Critério | Conf. |
 |---|-------------|----------|----------|-------|
+
+### Opções descartadas ou rebaixadas
+
+(Compile a partir das seções "Descartados/Rebaixados" dos 8 pesquisadores — não omita esta seção mesmo se a lista for curta; o usuário quer ver o que foi excluído e por quê)
+
+| Opção | Motivo | Fonte / confiança |
+|-------|--------|---------------------|
 
 ### Pontos em aberto entre juízes
 
@@ -653,6 +664,18 @@ Salve em `outputs/final/relatorio-final.html` e publique via Artifact tool (favi
         <thead><tr><th>#</th><th>Divergência</th><th>Veredito</th><th>Critério</th><th>Conf.</th></tr></thead>
         <tbody>
           <tr><td>1</td><td>...</td><td>...</td><td>...</td><td class="c-mid">🟡</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Opções descartadas ou rebaixadas</summary>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Opção</th><th>Motivo</th><th>Fonte / conf.</th></tr></thead>
+        <tbody>
+          <tr><td>...</td><td>...</td><td>...</td></tr>
         </tbody>
       </table>
     </div>

@@ -29,6 +29,10 @@
 | 🔴 | Baixa | Fonte única, sinal de pegadinha, ou não verificável |
 | ⚪ | Não verificável | Opinião ou preferência subjetiva |
 
+## Diferencial vs. critério obrigatório
+
+Quando o tema lista atributos como "diferencial", "bônus", "desempate" ou "não é prioridade forte", trate-os como **pontos a favor, nunca como filtro de exclusão**. Um candidato que não tem esse atributo não deve ser descartado ou rebaixado por causa disso — apenas não ganha o bônus. Só é correto excluir um candidato por não atender a um critério que o tema declarou como **obrigatório/prioritário** (ex: item (a), (b), (c)... numa lista de prioridade). Ao registrar um candidato sem o diferencial, marque isso como neutro ("não confirmado — não é motivo de exclusão"), não como pegadinha ou ponto negativo.
+
 ## Peso por tipo de tema
 
 | Tipo | Prioridade |

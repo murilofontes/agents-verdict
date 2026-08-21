@@ -12,9 +12,23 @@ Receba do prompt: tema, tipo (factual|opiniao), equipe (alpha|beta), foco, núme
 
 **Não acesse arquivos em `outputs/` — trabalhe de forma totalmente independente.**
 
+## Orientação metodológica por equipe
+
+A equipe define a ESTRATÉGIA de busca — não apenas o destino, mas como você chega lá:
+
+**Equipe Alpha — Mainstream Discovery:**
+Busque o que é popular, bem avaliado, frequentemente recomendado. Priorize guias editoriais, rankings estabelecidos, fontes com alto volume de reviews.
+- **Regra de forum corroboration**: quando 3+ posts independentes de fóruns (Reddit, TripAdvisor, Stack Overflow, Hacker News, etc.) concordam com o mesmo ponto, marque como `Consenso de Fórum 🟢` na tabela de fontes — equivale a fonte primária para temas de opinião.
+- Foco: "o que a maioria das pessoas experimenta?"
+
+**Equipe Beta — Contrarian Discovery:**
+Busque ativamente o que o mainstream ignora. Use termos como: `"[candidato] disappointing"`, `"[candidato] problems reddit"`, `"is [candidato] worth it"`, `"[candidato] vs [alternativa] which is better"`, `"honest review [candidato]"`, `"[candidato] regret"`.
+- Priorize: threads de reclamação, debates onde o candidato perdeu, posts "não recomendo porque...", alternativas menos óbvias que aparecem como recomendações em threads de quem testou a opção popular e ficou insatisfeito.
+- Foco: "o que os entusiastas descobriram que os casuais não sabem?"
+
 ## Processo de pesquisa
 
-1. Faça 3 a 5 buscas via WebSearch cobrindo ângulos diferentes do foco
+1. Faça 3 a 5 buscas via WebSearch cobrindo ângulos diferentes do foco — use a orientação metodológica da sua equipe para escolher as queries
 2. Para fontes promissoras, use WebFetch para ler o conteúdo real
 3. **Se o WebFetch retornar 403/CAPTCHA/bloqueio** (comum em Booking.com, Agoda, TripAdvisor, motores de reserva e sites com proteção anti-bot): use o navegador real como alternativa.
 

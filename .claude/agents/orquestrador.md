@@ -146,20 +146,21 @@ Leia `estado-atual.md` e exiba com emojis de progresso:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🔬 Iniciando investigação em paralelo...
 
-  EQUIPE ALPHA             EQUIPE BETA
-  👤 Analista de Campo  ↔  👤 Analista de Campo
-  📰 Invest. Oficial    ↔  📰 Invest. Oficial
-  💰 Esp. de Mercado    ↔  💰 Esp. de Mercado
-  ⚠️  Auditora de Riscos ↔  ⚠️  Auditora de Riscos
+  EQUIPE ALPHA (mainstream)    EQUIPE BETA (contrarian)
+  👤 Analista de Campo      ↔  👤 Analista de Campo
+  📰 Invest. Oficial        ↔  📰 Invest. Oficial
+  💰 Esp. de Mercado        ↔  💰 Esp. de Mercado
+  ⚠️  Auditora de Riscos    ↔  ⚠️  Auditora de Riscos
   [se IAs > 0:]
   🤖 IAs: [nomes das IAs coladas]
 
   ⏳ [N] agentes rodando em paralelo...
 
-  Fase 1.5 → ⚗️  Funil seleciona finalistas + aprofundamento paralelo
-  Fase 2    → ⚔️  Mediador mapeia convergências e divergências
-  Fase 3    → ⚖️  3 juízes deliberam com perfis enriquecidos
-  Fase 4    → 📝 Orquestrador emite veredito acionável
+  Fase 1    → Alpha (mainstream) + Beta (contrarian) — perspectivas opostas
+  Fase 1.5  → Funil: seleção inline + aprofundadores navegam fontes reais
+  Fase 2    → Mediador mapeia fatos (sem conclusão — não enviesa os juízes)
+  Fase 3    → 3 juízes com evidências assimétricas — herding prevenido
+  Fase 4    → Orquestrador sintetiza perspectivas divergentes → veredito
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -171,14 +172,14 @@ Invoque simultaneamente via Agent tool:
 
 Cada prompt de pesquisador deve terminar com o lembrete: `Documente também os candidatos descartados/rebaixados com o motivo (seção "Descartados/Rebaixados" no seu output). Se o tema listar algum atributo como "diferencial"/"bônus"/"desempate", NUNCA descarte um candidato só por não ter esse atributo — ver criterios/avaliacao.md.`
 
-**Equipe Alpha (4 pesquisadores):**
+**Equipe Alpha — mainstream (busca o que é popular, bem avaliado, corroborado por fóruns):**
 - Prompt 1: `Tema: "[tema]". Tipo: [tipo]. Equipe: alpha. Foco: relatos de usuários, fóruns, experiências pessoais. Pesquisador número: 1. Salve em outputs/grupo-alpha/pesquisador-1-relatos.md`
 - Prompt 2: `Tema: "[tema]". Tipo: [tipo]. Equipe: alpha. Foco: dados oficiais, fontes técnicas, documentação primária. Pesquisador número: 2. Salve em outputs/grupo-alpha/pesquisador-2-oficial.md`
 - Prompt 3: `Tema: "[tema]". Tipo: [tipo]. Equipe: alpha. Foco: comparação de preços, opções disponíveis, mercado. Pesquisador número: 3. Salve em outputs/grupo-alpha/pesquisador-3-mercado.md`
 - Prompt 4: `Tema: "[tema]". Tipo: [tipo]. Equipe: alpha. Foco: riscos, desvantagens, contraindicações, casos negativos. Pesquisador número: 4. Salve em outputs/grupo-alpha/pesquisador-4-riscos.md`
 
-**Equipe Beta (4 pesquisadores — focos idênticos, buscas independentes):**
-- Prompt 1-4: igual ao Alpha mas com `Equipe: beta` e pasta `outputs/grupo-beta/`
+**Equipe Beta — contrarian (busca falhas, decepções, alternativas que o mainstream ignora):**
+- Prompt 1-4: igual ao Alpha mas com `Equipe: beta` e pasta `outputs/grupo-beta/` — a metodologia contrarian é controlada pelo agente pesquisador com base na equipe recebida
 
 **Antes de disparar a Fase 1, se o tema tiver um teto numérico (orçamento, prazo, capacidade) junto de um alvo de qualidade (nota mínima, nível "premium"/"wow", certificação) que pareçam conflitantes com base no seu conhecimento geral do mercado, avise o usuário disso e pergunte se o teto é rígido ou flexível antes de gastar os 8 agentes — é mais barato perguntar uma vez do que rodar o pipeline inteiro sobre uma suposição errada.**
 
@@ -191,22 +192,17 @@ Aguarde todos concluírem. Exiba: `✅ [N] investigações concluídas.`
 
 ---
 
-### FASE 1.5 — Funil (seleção e aprofundamento de finalistas)
+### FASE 1.5 — Funil (seleção inline + aprofundamento de finalistas)
+
+**Passo A — Seleção (o ORQUESTRADOR faz diretamente, sem subagente):**
+
+1. Leia todos os arquivos de `outputs/grupo-alpha/` e `outputs/grupo-beta/`
+2. Liste todos os candidatos mencionados em qualquer relatório
+3. Para cada candidato, calcule: `score = frequência × confiança_média − penalidade_por_pegadinhas` (penalidade: −2 por pegadinha confirmada, −1 por alerta não confirmado)
+4. Selecione os top 5 (ou menos se emergiram menos candidatos relevantes)
+5. Salve o ranking em `outputs/funil/selecao.md` (lista com score, frequência, pontos fortes, ângulos cegos)
 
 Exiba:
-```
-⚗️  Funil analisando [N] relatórios para eleger finalistas...
-```
-
-**Passo A — Seleção:** Invoque o agente `pesquisador-funil`:
-```
-Tema: "[tema]". Tipo: [tipo].
-Pasta Alpha: outputs/grupo-alpha/
-Pasta Beta: outputs/grupo-beta/
-Salve em outputs/funil/selecao.md
-```
-
-Aguarde. Leia `outputs/funil/selecao.md`. Exiba:
 ```
 🎯 Finalistas selecionados: [N] candidatos
    • [candidato 1] — score [X]
@@ -270,9 +266,9 @@ data: [YYYY-MM-DD HH:MM]
 Exiba: `⚖️  3 juízes deliberando independentemente...`
 
 Invoque simultaneamente:
-- Agente `juiz`, prompt: `Juiz número: 1. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/funil/ (perfis aprofundados dos finalistas — priorize esses dados sobre os da Fase 1), outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-1-veredito.md`
-- Agente `juiz`, prompt: `Juiz número: 2. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/funil/ (perfis aprofundados dos finalistas — priorize esses dados sobre os da Fase 1), outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-2-veredito.md`
-- Agente `juiz`, prompt: `Juiz número: 3. Tema: "[tema]". Tipo: [tipo]. Leia outputs/grupo-alpha/, outputs/grupo-beta/, outputs/grupo-ia/, outputs/funil/ (perfis aprofundados dos finalistas — priorize esses dados sobre os da Fase 1), outputs/grupo-c/mapa-divergencias.md e (se existir) outputs/grupo-c/preferencias-usuario.md — as preferências do usuário têm peso decisivo em pontos de opinião. Salve em outputs/final/juiz-3-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 1. Tema: "[tema]". Tipo: [tipo]. Evidência primária: outputs/grupo-alpha/ (pesquisa mainstream — leia ANTES do mapa). Evidência compartilhada: outputs/funil/, outputs/grupo-c/mapa-divergencias.md, outputs/grupo-c/preferencias-usuario.md (se existir). Salve em outputs/final/juiz-1-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 2. Tema: "[tema]". Tipo: [tipo]. Evidência primária: outputs/grupo-beta/ (pesquisa contrarian — leia ANTES do mapa). Evidência compartilhada: outputs/funil/, outputs/grupo-c/mapa-divergencias.md, outputs/grupo-c/preferencias-usuario.md (se existir). Salve em outputs/final/juiz-2-veredito.md`
+- Agente `juiz`, prompt: `Juiz número: 3. Tema: "[tema]". Tipo: [tipo]. Evidência primária: outputs/grupo-ia/ (perspectiva das IAs externas — leia ANTES do mapa; se pasta vazia, leia outputs/grupo-alpha/ e outputs/grupo-beta/ completos). Evidência compartilhada: outputs/funil/, outputs/grupo-c/mapa-divergencias.md, outputs/grupo-c/preferencias-usuario.md (se existir). Salve em outputs/final/juiz-3-veredito.md`
 
 Aguarde ambos. Exiba: `✅ 3 vereditos recebidos.`
 

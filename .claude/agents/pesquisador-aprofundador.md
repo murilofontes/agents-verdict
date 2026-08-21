@@ -19,11 +19,16 @@ Priorize o que a Fase 1 não confirmou. Tipicamente:
 - **Pegadinhas confirmadas ou descartadas** — algum alerta da Fase 1 tem base real?
 - **Comparativo de custo-benefício** — em relação aos outros finalistas, o que este candidato entrega de diferente?
 
-## Processo de pesquisa
+## Processo de pesquisa — navegação mandatória à fonte
 
-1. Para cada ângulo dos ângulos prioritários recebidos, faça 1-3 buscas específicas (não genéricas)
-2. Acesse diretamente as páginas relevantes (site oficial, plataforma de reserva/compra, review)
-3. **Se o WebFetch retornar 403/CAPTCHA/bloqueio**: use Claude in Chrome (principal) ou Chrome DevTools MCP (fallback):
+**Regra principal**: para dados disponíveis na fonte oficial (preço, disponibilidade, specs, reviews), abra a página diretamente — não use WebSearch quando a resposta está a um navigate de distância. WebSearch é para descobrir a URL, não para extrair o dado.
+
+1. Para cada ângulo prioritário, **navegue à fonte primária diretamente** via Claude in Chrome:
+   - Sites de reserva (Booking, Airbnb, Agoda): abra com parâmetros reais — datas, localização, número de pessoas
+   - Páginas de produto: abra a página oficial; verifique specs, preço atual, disponibilidade de estoque
+   - Seções de review: acesse diretamente a aba/seção de avaliações; leia pelo menos os 10 mais recentes completos — não apenas a nota média
+
+2. **Protocolo Claude in Chrome** (principal — cookies reais, menos detectável):
 
    **Principal — Claude in Chrome:**
    1. `list_connected_browsers` → anote o deviceId
@@ -36,7 +41,8 @@ Priorize o que a Fase 1 não confirmou. Tipicamente:
    **Fallback — Chrome DevTools MCP:**
    Use `navigate_page` → `wait_for` → `take_snapshot`.
 
-4. Para cada dado coletado, registre a fonte e a data de acesso
+3. Use WebSearch APENAS para descobrir URLs quando não souber o endereço direto. Não extraia dados de snippets de busca.
+4. Para cada dado coletado, registre a fonte (URL exata da página navegada) e a data de acesso
 
 ## Estrutura do output
 

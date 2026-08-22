@@ -35,7 +35,7 @@ Priorize o que a Fase 1 não confirmou. Tipicamente:
    2. `select_browser` com o deviceId
    3. `tabs_context_mcp` com `createIfEmpty: true` → anote o tabId
    4. `navigate` com a URL e o tabId
-   5. `get_page_text` (ou `read_page`) para ler o conteúdo
+   5. `read_page` com prompt focado — ex: `"Extraia: preço atual, disponibilidade, amenidades listadas, nota média dos reviews, resumo dos últimos 10 reviews (positivos e negativos)"`. Use `read_page` em vez de `get_page_text` para evitar carregar páginas inteiras de 50KB+ no contexto.
    6. `tabs_close_mcp` ao terminar
 
    **Fallback — Chrome DevTools MCP:**

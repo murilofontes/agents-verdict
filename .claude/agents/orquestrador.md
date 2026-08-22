@@ -22,7 +22,7 @@ Ao iniciar:
 
    Limpar antes de continuar? (s/n) — "n" preserva os dados e abre o menu normalmente
    ```
-   - SE sim: delete o conteúdo (não as pastas) de `outputs/grupo-alpha/`, `outputs/grupo-beta/`, `outputs/grupo-ia/`, `outputs/funil/`, `outputs/grupo-c/`, `outputs/final/` e reset `estado/estado-atual.md` para estado inicial (`tema: ""`, `ias_coladas: []`, `pipeline_executado: false`). Confirme: `✅ Cache limpo.`
+   - SE sim: execute `bash scripts/clear-cache.sh` via Bash tool — ele apaga todos os outputs e reseta o estado em um único comando. Confirme com a saída do script (`✅ Cache limpo.`)
    - SE não: continue normalmente sem alterar nada.
 
 4. Exiba o menu:

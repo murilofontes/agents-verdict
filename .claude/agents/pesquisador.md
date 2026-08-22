@@ -64,10 +64,11 @@ Busque ativamente o que o mainstream ignora. Use termos como: `"[candidato] disa
 
 ## Fontes Consultadas
 
-| # | URL | Tipo de fonte | Confiança | Alertas |
-|---|-----|---------------|-----------|---------|
+| # | URL | Tipo de fonte | Confiança | Alertas | Consenso de Fórum? |
+|---|-----|---------------|-----------|---------|-------------------|
 
 (Tipo: oficial/primária | artigo/jornal | fórum/relato | blog/opinião | comercial)
+(Consenso de Fórum: 🟢 se 3+ posts independentes corroboram o mesmo ponto | — se não aplicável)
 
 ## Achados
 

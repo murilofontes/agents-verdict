@@ -270,7 +270,7 @@ Invoque simultaneamente:
 - Agente `juiz`, prompt: `Juiz número: 2. Tema: "[tema]". Tipo: [tipo]. Evidência primária: outputs/grupo-beta/ (pesquisa contrarian — leia ANTES do mapa). Evidência compartilhada: outputs/funil/, outputs/grupo-c/mapa-divergencias.md, outputs/grupo-c/preferencias-usuario.md (se existir). Salve em outputs/final/juiz-2-veredito.md`
 - Agente `juiz`, prompt: `Juiz número: 3. Tema: "[tema]". Tipo: [tipo]. Evidência primária: outputs/grupo-ia/ (perspectiva das IAs externas — leia ANTES do mapa; se pasta vazia, leia outputs/grupo-alpha/ e outputs/grupo-beta/ completos). Evidência compartilhada: outputs/funil/, outputs/grupo-c/mapa-divergencias.md, outputs/grupo-c/preferencias-usuario.md (se existir). Salve em outputs/final/juiz-3-veredito.md`
 
-Aguarde ambos. Exiba: `✅ 3 vereditos recebidos.`
+Aguarde os 3. Exiba: `✅ 3 vereditos recebidos.`
 
 ---
 

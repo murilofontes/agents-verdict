@@ -19,6 +19,7 @@
 - Dado com data clara e recente o suficiente para o tema
 - Fonte reconhece limitações, contras ou incertezas (sinal de honestidade)
 - Fatos específicos e checáveis, não vagos
+- **Consenso de Fórum**: 3+ posts independentes em fóruns distintos (Reddit, TripAdvisor, Stack Overflow, Hacker News, etc.) concordando com o mesmo ponto — equivale a fonte primária para temas de opinião. Marque como `Consenso de Fórum 🟢` na tabela de fontes. Requisitos: (a) posts em plataformas diferentes ou threads não relacionadas, (b) sem sinais de coordenação ou mesma origem, (c) experiências independentes, não apenas concordância com uma afirmação.
 
 ## Escala de confiança (usar em TODAS as afirmações)
 

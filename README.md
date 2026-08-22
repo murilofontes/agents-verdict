@@ -40,29 +40,41 @@ Abra Claude Code neste diretório e invoque o orquestrador:
 
 O menu interativo guia todo o fluxo.
 
-## Arquitetura v2
+## Arquitetura
 
 ```
-Phase 1 (paralelo — até 12 agentes simultâneos):
-  Equipe Alpha: pesquisador ×4  → outputs/grupo-alpha/
-  Equipe Beta:  pesquisador ×4  → outputs/grupo-beta/
-  IAs externas: ia-externa ×N   → outputs/grupo-ia/  (0-4, opcional)
+Fase 1   (paralelo — até 12 agentes):
+  Alpha ×4 — mainstream: busca o popular, bem avaliado, corroborado por fóruns
+  Beta  ×4 — contrarian: busca falhas, decepções, alternativas que o mainstream ignora
+  IAs externas ×N → outputs/grupo-ia/ (0-4, opcional)
 
-Phase 2: mediador-debate → mapa de divergências
-Phase 3 (paralelo): juiz ×3 → vereditos independentes
-Phase 4: orquestrador → veredito final + artifact HTML visual
+Fase 1.5 (seleção inline + paralelo):
+  Orquestrador seleciona top 5 finalistas por score de consenso
+  pesquisador-aprofundador ×5 — navega fontes reais (booking page, reviews, produto)
+
+Fase 2   (sequencial):
+  mediador-debate → mapa de fatos e disputas (sem conclusão — preserva independência dos juízes)
+
+Fase 3   (paralelo — evidência assimétrica por juiz, anti-herding):
+  Juiz 1 (Pragmático)  → lê grupo-alpha/ primeiro
+  Juiz 2 (Conservador) → lê grupo-beta/ primeiro
+  Juiz 3 (Ousado)      → lê grupo-ia/ primeiro
+
+Fase 4   (orquestrador):
+  Sintetiza 3 perspectivas divergentes → veredito acionável + artifact HTML
 ```
 
 ## Agentes
 
 | Agente | Papel | Chamadas |
 |--------|-------|---------|
-| `orquestrador` | Menu + coordenação | entry point |
+| `orquestrador` | Menu + coordenação + seleção de finalistas inline | entry point |
 | `gerador-prompt` | Gera prompt comparável para IAs externas | 1× |
 | `ia-externa` | Analisa e estrutura resposta de IA externa | 0-4× |
-| `pesquisador` | Pesquisa independente por foco (relatos/oficial/mercado/riscos) | 8× (4 Alpha + 4 Beta) |
-| `mediador-debate` | Mapa de convergências e divergências entre as 2 equipes + IAs | 1× |
-| `juiz` | Veredito independente com recomendação acionável obrigatória | 3× |
+| `pesquisador` | Pesquisa independente (alpha=mainstream / beta=contrarian) | 8× |
+| `pesquisador-aprofundador` | Navega à fonte real para aprofundar cada finalista | ×N finalistas |
+| `mediador-debate` | Mapa de fatos e disputas — sem conclusão | 1× |
+| `juiz` | Veredito independente com evidência primária diferente por persona | 3× |
 
 ### Personas dos agentes
 
@@ -80,10 +92,11 @@ Phase 4: orquestrador → veredito final + artifact HTML visual
 
 ```
 outputs/
-├── grupo-alpha/      # Pesquisas da Equipe Alpha
-├── grupo-beta/       # Pesquisas da Equipe Beta
+├── grupo-alpha/      # Pesquisas da Equipe Alpha (mainstream)
+├── grupo-beta/       # Pesquisas da Equipe Beta (contrarian)
 ├── grupo-ia/         # Análises das IAs externas
-├── grupo-c/          # Mapa de divergências
+├── funil/            # Seleção de finalistas + perfis aprofundados
+├── grupo-c/          # Mapa de divergências + preferências do usuário
 ├── final/            # Vereditos dos juízes + relatório + artifact HTML
 └── historico/        # Temas anteriores arquivados
 ```

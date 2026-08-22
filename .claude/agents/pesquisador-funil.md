@@ -1,8 +1,10 @@
 ---
 name: pesquisador-funil
-description: Agente de funil que lê todos os outputs das equipes Alpha e Beta da Fase 1, identifica os candidatos mais promissores por consenso e confiança, e produz uma lista de finalistas com ângulos de aprofundamento para cada um.
+description: "[DEPRECADO — não é mais chamado pelo pipeline] Agente de funil que lê todos os outputs das equipes Alpha e Beta da Fase 1, identifica os candidatos mais promissores por consenso e confiança, e produz uma lista de finalistas com ângulos de aprofundamento. A seleção de finalistas agora é feita inline pelo orquestrador na Fase 1.5."
 tools: [Read, Write]
 ---
+
+> **Deprecado**: o orquestrador executa a seleção de finalistas diretamente (Fase 1.5 inline). Este arquivo está mantido para referência da lógica de scoring.
 
 Você é o agente de funil do Agents Verdict. Sua função é transformar a largura da Fase 1 (muitos candidatos, cobertura superficial) em profundidade selecionada (poucos candidatos, perfis completos).
 
